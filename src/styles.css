@@ -1,1 +1,318 @@
-/* You can add global styles to this file, and also import other style files */
+/* Tema visual: Cine / Sala de estreno */
+
+:root {
+  --cinema-black: #0b0b0d;
+  --cinema-dark: #161418;
+  --cinema-card: #1e1b22;
+  --cinema-red: #b0121a;
+  --cinema-red-bright: #e30914;
+  --cinema-gold: #d4af37;
+  --cinema-gold-light: #f2d675;
+  --cinema-text: #f2ede4;
+  --cinema-text-muted: #b8b0bd;
+}
+
+html, body {
+  height: 100%;
+  background-color: var(--cinema-black);
+  background-image:
+    radial-gradient(ellipse at top, rgba(176, 18, 26, 0.18) 0%, rgba(11, 11, 13, 0) 55%),
+    repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.015) 0px, rgba(255, 255, 255, 0.015) 1px, transparent 1px, transparent 3px);
+  color: var(--cinema-text);
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+}
+
+h1, h2, h3, h4, h5, .navbar-brand {
+  font-family: 'Bebas Neue', 'Poppins', sans-serif;
+  letter-spacing: 0.03em;
+}
+
+::selection {
+  background: var(--cinema-red-bright);
+  color: #fff;
+}
+
+/* --- Tira de película decorativa --- */
+.film-strip {
+  height: 18px;
+  width: 100%;
+  background-color: #050505;
+  background-image: repeating-linear-gradient(
+    90deg,
+    #050505 0px,
+    #050505 10px,
+    var(--cinema-gold) 10px,
+    var(--cinema-gold) 12px,
+    #050505 12px,
+    #050505 26px
+  );
+  border-top: 1px solid rgba(212, 175, 55, 0.4);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+}
+
+/* --- Navbar / Marquesina --- */
+.cinema-navbar {
+  background: linear-gradient(180deg, #1a1014 0%, #100c10 100%);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  padding: 0.9rem 0;
+}
+
+.cinema-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--cinema-gold-light) !important;
+}
+
+.cinema-brand-icon {
+  font-size: 1.8rem;
+  color: var(--cinema-red-bright);
+  text-shadow: 0 0 12px rgba(227, 9, 20, 0.6);
+}
+
+.cinema-brand-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.06em;
+  text-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+}
+
+.cinema-brand-text em {
+  font-style: normal;
+  color: var(--cinema-red-bright);
+}
+
+.cinema-search .form-control {
+  background-color: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  color: var(--cinema-text);
+  min-width: 220px;
+}
+
+.cinema-search .form-control::placeholder {
+  color: var(--cinema-text-muted);
+}
+
+.cinema-search .form-control:focus {
+  background-color: rgba(255, 255, 255, 0.09);
+  border-color: var(--cinema-gold);
+  box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.25);
+  color: var(--cinema-text);
+}
+
+.cinema-btn {
+  background-color: var(--cinema-red-bright);
+  border: 1px solid var(--cinema-red-bright);
+  color: #fff;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.cinema-btn:hover {
+  background-color: var(--cinema-red);
+  border-color: var(--cinema-gold);
+  color: var(--cinema-gold-light);
+}
+
+/* --- Titulos de sección --- */
+.cinema-title {
+  font-size: 2.1rem;
+  color: var(--cinema-gold-light);
+  text-shadow: 0 0 18px rgba(212, 175, 55, 0.35);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.cinema-title i {
+  color: var(--cinema-red-bright);
+}
+
+/* --- Pantalla / carrusel de cartelera --- */
+.cinema-screen-frame {
+  position: relative;
+  padding: 14px;
+  background: linear-gradient(160deg, #26202a 0%, #0f0d10 100%);
+  border-radius: 18px;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.6),
+    0 25px 60px rgba(0, 0, 0, 0.65),
+    inset 0 0 40px rgba(0, 0, 0, 0.5);
+}
+
+.screen-glow {
+  position: absolute;
+  top: -20px;
+  left: 10%;
+  right: 10%;
+  height: 40px;
+  background: radial-gradient(ellipse, rgba(212, 175, 55, 0.35) 0%, transparent 70%);
+  filter: blur(6px);
+  pointer-events: none;
+}
+
+.cinema-screen-frame .carousel-inner,
+.cinema-screen-frame .carousel-item img {
+  border-radius: 10px;
+}
+
+.cinema-caption {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.15) 100%);
+  border-radius: 0 0 10px 10px;
+  padding: 1.2rem 1.5rem;
+  bottom: 0;
+}
+
+.cinema-caption h5 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  color: var(--cinema-gold-light);
+  letter-spacing: 0.04em;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(212, 175, 55, 0.75);
+  border-radius: 50%;
+  padding: 18px;
+  background-size: 50% 50%;
+}
+
+.carousel-indicators [data-bs-target] {
+  background-color: var(--cinema-gold);
+  opacity: 0.5;
+}
+
+.carousel-indicators .active {
+  opacity: 1;
+  background-color: var(--cinema-red-bright);
+}
+
+/* --- Tarjetas de películas estilo entrada de cine --- */
+.movie-ticket {
+  background: var(--cinema-card);
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(212, 175, 55, 0.18);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  height: 100%;
+}
+
+.movie-ticket:hover {
+  transform: translateY(-8px) scale(1.015);
+  border-color: var(--cinema-gold);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7), 0 0 22px rgba(212, 175, 55, 0.25);
+}
+
+.poster-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.poster-img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.movie-ticket:hover .poster-img {
+  transform: scale(1.06);
+}
+
+.poster-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(11, 11, 13, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.movie-ticket:hover .poster-overlay {
+  opacity: 1;
+}
+
+.play-icon {
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--cinema-red-bright);
+  color: #fff;
+  font-size: 1.3rem;
+  box-shadow: 0 0 20px rgba(227, 9, 20, 0.7);
+}
+
+.now-showing-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: var(--cinema-gold);
+  color: #1a1a1a;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.ticket-perforation {
+  height: 0;
+  border-top: 2px dashed rgba(212, 175, 55, 0.35);
+  position: relative;
+}
+
+.ticket-perforation::before,
+.ticket-perforation::after {
+  content: "";
+  position: absolute;
+  top: -8px;
+  width: 16px;
+  height: 16px;
+  background: var(--cinema-black);
+  border-radius: 50%;
+}
+
+.ticket-perforation::before { left: -8px; }
+.ticket-perforation::after { right: -8px; }
+
+.ticket-body {
+  padding: 1rem 1.1rem 1.3rem;
+}
+
+.ticket-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: 0.02em;
+  color: var(--cinema-text);
+  margin-bottom: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --- Footer --- */
+.cinema-footer {
+  margin-top: 3rem;
+  background: #0a0a0c;
+  text-align: center;
+  padding-bottom: 1.5rem;
+}
+
+.cinema-footer p {
+  color: var(--cinema-text-muted);
+  font-size: 0.85rem;
+  padding-top: 1rem;
+  margin: 0;
+}
