@@ -1,7 +1,0 @@
-{
-    "API_MOVIE_DB": "https://api.themoviedb.org/3",
-    "LAMBDA_FUNCTION_URL": "https://your-lambda-url",
-    "KEY_MOVIEDB": "1865f43a0549ca50d341dd9ab8b29f49",
-    "LANGUAGE": "es-ES",
-    "API_FAVORITOS": "http://localhost:8080/api/"
-}
