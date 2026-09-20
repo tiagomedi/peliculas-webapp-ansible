@@ -1,0 +1,29 @@
+- name: Configurar servidor y dependencias de ec2_instances
+  hosts: ec2_instances
+  become: true
+  tasks:
+    - name: Actualizar paquetes del sistema
+      apt:
+        update_cache: yes
+
+    - name: Instalacion Node.js y npm
+      apt:
+        name:
+          - nodejs
+          - npm
+        state: present
+
+    - name: Instalar unzip en EC2
+      apt:
+        name: unzip
+        state: present
+
+    - name: Instalacion y configuracion nginx
+      apt:
+        name: nginx
+        state: present
+
+    - name: Reiniciar Nginx para aplicar cambios
+      service:
+        name: nginx
+        state: restarted

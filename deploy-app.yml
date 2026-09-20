@@ -1,0 +1,50 @@
+- name: Desplegar App Angular en EC2
+  hosts: ec2_instances
+  become: true
+  tasks:
+  - name: Copiar la app comprimida al servidor EC2
+    copy:
+      src: files/peliculas_webapp.zip
+      dest: /home/ubuntu/peliculas_webapp.zip
+
+  - name: Descomprimir la app
+    # El zip ya trae la carpeta raiz peliculas_webapp/, por eso se descomprime en /home/ubuntu
+    ansible.builtin.unarchive:
+      src: /home/ubuntu/peliculas_webapp.zip
+      dest: /home/ubuntu
+      remote_src: yes
+      exclude:
+        - __MACOSX/*
+
+  - name: Ajustar permisos de la carpeta del proyecto
+    file:
+      path: /home/ubuntu/peliculas_webapp
+      state: directory
+      owner: ubuntu
+      group: ubuntu
+      mode: '0755'
+      recurse: yes
+
+  - name: Ajustar permisos de los archivos dentro de la carpeta
+    command: sudo chown -R ubuntu:ubuntu /home/ubuntu/peliculas_webapp
+
+  - name: Instalar dependencias de la app en Angular
+    command: npm install
+    args:
+      chdir: /home/ubuntu/peliculas_webapp
+
+  - name: Construir la app de Angular
+    shell: npm run build --prod
+    args:
+      chdir: /home/ubuntu/peliculas_webapp
+
+  - name: Copiar archivos de Angular al servidor de Nginx
+    copy:
+      src: /home/ubuntu/peliculas_webapp/dist/blockstellartmovieapp/
+      dest: /var/www/html/
+      remote_src: yes
+
+  - name: Reiniciar Nginx para aplicar los cambios
+    service:
+      name: nginx
+      state: restarted
