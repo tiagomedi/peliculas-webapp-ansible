@@ -1,3 +1,5 @@
 ansible_key.pem
 *.yml
 launch-ec2.yml
+node_modules/
+files/peliculas_webapp.zip
