@@ -33,10 +33,32 @@
     args:
       chdir: /home/ubuntu/peliculas_webapp
 
+  # t3.micro tiene solo 1 GB de RAM y ng build se queda sin memoria, se agrega swap
+  - name: Crear archivo swap de 2 GB
+    command: fallocate -l 2G /swapfile
+    args:
+      creates: /swapfile
+
+  - name: Ajustar permisos del archivo swap
+    file:
+      path: /swapfile
+      mode: '0600'
+
+  - name: Formatear el archivo swap
+    shell: blkid /swapfile | grep -q swap || mkswap /swapfile
+    register: mkswap_result
+    changed_when: "'Setting up swapspace' in mkswap_result.stdout"
+
+  - name: Activar el swap
+    shell: swapon --show | grep -q /swapfile || swapon /swapfile
+    changed_when: false
+
   - name: Construir la app de Angular
     shell: npm run build --prod
     args:
       chdir: /home/ubuntu/peliculas_webapp
+    environment:
+      NODE_OPTIONS: --max-old-space-size=1536
 
   - name: Copiar archivos de Angular al servidor de Nginx
     copy:
